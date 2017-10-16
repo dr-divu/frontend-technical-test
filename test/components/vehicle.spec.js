@@ -32,7 +32,7 @@ describe('<Vehicle />', () => {
     const error = 'Not good.'
 
     const wrapper = shallow(<Vehicle error={error} />)
-    const errorWrapper = shallow(<Error error={error} />)
+    const errorWrapper = shallow(<Error message={error} />)
     expect(wrapper.html()).to.deep.equal(errorWrapper.html())
   })
 

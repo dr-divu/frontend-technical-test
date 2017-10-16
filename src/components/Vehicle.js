@@ -10,7 +10,7 @@ export default class Vehicle extends PureComponent {
   }
 
   render() {
-    if (this.props.error) return <Error message={this.state.error} />
+    if (this.props.error) return <Error message={this.props.error} />
     if (this.props.loading) return <Loading />
 
     const { id, description, price, image } = this.props

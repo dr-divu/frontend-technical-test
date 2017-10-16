@@ -15,7 +15,7 @@ export default class VehicleList extends PureComponent {
   }
 
   render() {
-    if (this.props.error) return <Error message={this.state.error} />
+    if (this.props.error) return <Error message={this.props.error} />
     if (this.props.loading) return <Loading />
     
     return <div className="vehicle-list">{this.renderVehicles.call(this)}</div>
