@@ -1,19 +1,28 @@
-/**
-* This is an example request. Create your own using best practises for
-* handling asynchronous data fetching
-**/
-
-export const getData = (cb) => {
-    const vehicles = new XMLHttpRequest();
-    vehicles.open('GET', 'http://localhost:9988/api/vehicle');
-
-    vehicles.onreadystatechange = function() {
-        if(vehicles.readyState === 4) {
- 		    if(vehicles.status === 200) {
- 			    cb(vehicles.responseText);
-		    }
+const createRequest = (method, url) => {
+	return new Promise((resolve, reject) => {
+	  const request = new XMLHttpRequest()
+	  request.open(method, url)
+	
+	  request.onreadystatechange = () => {
+		if (request.readyState === 4) {
+		  if (request.status >= 200 && request.status < 300) {
+			try {
+			  resolve(JSON.parse(request.responseText))
+			} catch (e) {
+			  reject('Oops! The data is not Ok!')
+			}
+		  } else {
+			reject(request.response)
+		  }
 		}
-	};
-
-	vehicles.send();
-};
+	  }
+	
+	  request.send()
+	})
+  }
+  
+  const getGetRequest = path => createRequest('GET', `http://localhost:9988${path}`)
+  
+  export const getVehicles = () => getGetRequest('/api/vehicle')
+  export const getVehicle = path => getGetRequest(path)
+  

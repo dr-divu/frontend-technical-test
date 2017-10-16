@@ -30,7 +30,7 @@ gulp.task('sass:watch', function () {
 });
 
 gulp.task('test', () => {
-    return gulp.src('./test/*.spec.js', {read: false})
+    return gulp.src('./test/**/*.spec.js', {read: false})
         .pipe(mocha({
             compilers: babel,
             require: ['./setupTest.js']
