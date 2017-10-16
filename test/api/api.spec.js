@@ -9,7 +9,6 @@ describe("Vehicle API's", function() {
   before(() => {
     app = server.listen(9988)
   })
-
   after(() => {
     app.close()
   })
