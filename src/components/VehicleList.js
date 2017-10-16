@@ -1,33 +1,30 @@
-import React, { Component } from 'react';
-import { getData } from '../api';
+import React, { PureComponent, PropTypes } from 'react'
+import { getVehicles } from '../api'
+import Vehicle from './vehicle'
+import Error from './Error'
+import Loading from './Loading'
 
-export default
-class VehicleList extends Component {
+export default class VehicleList extends PureComponent {
 
-	constructor(props) {
-		super(props);
+  componentDidMount() {
+    this.props.loadVehicles()
+  }
 
-		this.state = {
-			data: null
-		}
-	}
+  renderVehicles() {
+    return this.props.vehicles.map(v => <Vehicle key={v.id} {...v} loadVehicleDetail={this.props.loadVehicleDetail} />)
+  }
 
-	componentDidMount() {
-		getData((data) => {
-			this.setState({
-				data
-			})
-		});
-	}
+  render() {
+    if (this.props.error) return <Error message={this.state.error} />
+    if (this.props.loading) return <Loading />
+    
+    return <div className="vehicle-list">{this.renderVehicles.call(this)}</div>
+  }
+}
 
-	render() {
-		if(this.state.data) {
-			console.log(this.state.data);
-		    return (
-			    <h1>Hello World</h1>
-		    )
-	    }
-
-		return (<h1>Loading...</h1>);
-	}
+VehicleList.propTypes = {
+  vehicles: PropTypes.array.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.string.isRequired,
+  loadVehicles: PropTypes.func
 }
