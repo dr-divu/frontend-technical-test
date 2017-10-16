@@ -1,5 +1,11 @@
-$bg-colour: #ccc;
+@import "styles/utils";
+@import "styles/vehicle-list";
+@import "styles/vehicle";
+
 
 body {
-	background-color: $bg-colour;
+  background-color: $white;
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
 }

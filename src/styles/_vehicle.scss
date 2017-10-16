@@ -1,0 +1,79 @@
+.vehicle {
+  $border: 1px solid $light-grey;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-right: $border;
+  border-bottom: $border;
+
+  @include respond-to(desktop) {
+    width: calc(25% - 1px);
+  }
+
+  @include respond-to(tablet) {
+    width: calc(50% - 1px);
+  }
+
+  @include respond-to(mobile) {
+    width: calc(100% - 1px);
+    flex-direction: row;
+  }
+
+  &__image {
+    width: 100%;
+    height: 200px;
+    background-position: center center;
+    background-repeat: no-repeat;
+
+    @include respond-to(mobile) {
+      height: 150px;
+    }
+  }
+
+  &__information {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 5px;
+    color: $grey;
+
+    @include respond-to(not-mobile) {
+      align-items: center;
+
+      > * {
+        margin-bottom: 20px;
+      }
+    }
+
+    &__name {
+      $border: 1px solid $black;
+
+      color: $black;
+      margin: 20px 0;
+      padding: 5px 0;
+      text-transform: uppercase;
+      font-weight: bold;
+
+      border-top: $border;
+      border-bottom: $border;
+
+      @include respond-to(mobile) {
+        border: 0;
+        margin: 0;
+      }
+    }
+
+    @include respond-to(mobile) {
+      &__price {
+        margin: 10px 0;
+      }
+    }
+
+    @include respond-to(not-mobile) {
+      &__description {
+        text-align: center;
+      }
+    }
+  }
+}
