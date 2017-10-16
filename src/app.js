@@ -1,5 +1,16 @@
-import React from 'react';
-import { render } from 'react-dom';
-import VehicleList from './components/VehicleList';
+import React from 'react'
+import { render } from 'react-dom'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import VehicleList from './components/container'
+import reducer from './redux'
 
-render(<VehicleList />, document.getElementById('app'));
+const store = createStore(reducer, applyMiddleware(thunk))
+
+render(
+  <Provider store={store}>
+    <VehicleList />
+  </Provider>,
+  document.getElementById('app'),
+)
